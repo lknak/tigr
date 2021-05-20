@@ -1,0 +1,39 @@
+{
+    "env_name": "cheetah-multi-task",
+    "path_to_weights": "output/comparisons/cheetah-multi-task/ours/2021_05_10_17_35_02_cheetah_multi_task_ts~64_true_gmm/weights",
+    "showcase_itr": 2000,
+    "train_or_showcase": "showcase_task_inference",
+    "env_params": {
+        "n_train_tasks": 0,
+        "n_eval_tasks": 32,
+        "use_normalized_env": true,
+        "state_reconstruction_clip": null,
+        "task_variants":  ["velocity_forward", "velocity_backward",
+			   "goal_forward", "goal_backward",
+			   "flip_forward", "jump",
+			   "stand_front", "stand_back"]
+    },
+    "algo_params": {
+	"use_data_normalization": true,
+        "batch_size_rollout": 512,
+        "time_steps": 64,
+        "latent_size": 8,
+        "encoder_type": "gru",
+        "num_training_steps_policy": 0,
+        "num_training_steps_reconstruction": 0,
+	"num_train_epochs": 1,
+
+        "num_train_tasks_per_episode": 5,
+        "num_transitions_per_episode": 200,
+        "max_path_length": 200,
+
+        "num_showcase": 4,
+        "test_evaluation_every": 1
+    },
+    "reconstruction_params": {
+
+        "num_classes": 8,
+        "alpha_kl_z": 0.001,
+        "regularization_lambda": 0.1
+    }
+}

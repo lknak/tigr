@@ -1,0 +1,26 @@
+# pycharm
+.idea
+
+## General
+
+*.pyc
+*.ipynb_checkpoints
+__pycache__
+
+*.npy
+*.pkl
+
+*.swp
+*.swo
+
+.envrc
+
+## Project
+
+.temp
+.temp_cemrl
+*.pth
+
+/log
+/output
+/output/**

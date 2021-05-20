@@ -1,0 +1,18 @@
+# Meta-test performance
+
+python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/comparisons/cheetah-multi-task/PEARL/*;output/comparisons/cheetah-multi-task/promp/*;output/comparisons/cheetah-multi-task/rl2/*;output/comparisons/cheetah-multi-task/trpo/*" "TIGR;PEARL;PRO-MP;RL2;MAML" "Half-Cheetah 8-Task" -50 "" 0
+
+
+# Single env
+
+python vis_utils/plot_compare_csv.py "output/cheetah-multi-task/eval/*vel*;output/cheetah-multi-task/eval/pearl/cheetah-stationary-vel/*||output/cheetah-multi-task/eval/*dir*;output/cheetah-multi-task/eval/pearl/cheetah-stationary-dir/*||output/comparisons/ant-multi-task/ours/*;output/comparisons/ant-multi-task/PEARL/*;output/comparisons/ant-multi-task/promp/*;output/comparisons/ant-multi-task/rl2/*;output/comparisons/ant-multi-task/trpo/*" "TIGR;PEARL;PRO-MP;RL2;MAML" "Half-Cheetah Vel-Task||Half-Cheetah Dir-Task||Ant 3-Task" "0||-1||-50" "" 1
+
+
+# Clustering losses
+
+python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/clustering/*cheetah_multi_task_ts~64_no_cl_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_euclid_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_spars_true_gmm" "TIGR;No classification;No euclid;No sparsity" "Clustering Losses" -50 "" 0
+
+
+# Encoder ts
+
+python vis_utils/plot_compare_csv.py "output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~32_true_gmm" "GRU [64];MLP [64];TRANSFORMER [64];GRU [32];MLP [32];TRANSFORMER [32]" "Encoder Ablation" -50 "" 0

@@ -1,0 +1,35 @@
+{
+    "PCGrad_params": {
+        "use_PCGrad": false
+    },
+    "algo_params": {
+        "encoder_type": "gru",
+        "latent_size": 8,
+        "num_train_epochs": 2001,
+        "num_train_tasks_per_episode": 80,
+        "time_steps": 64,
+        "use_fixed_seeding": false
+    },
+    "env_name": "cheetah-multi-task",
+    "env_params": {
+        "n_eval_tasks": 40,
+        "n_train_tasks": 80,
+        "task_variants": [
+            "velocity_forward",
+            "velocity_backward",
+            "stand_back",
+            "stand_front",
+            "goal_forward",
+            "goal_backward",
+            "flip_forward",
+            "jump"
+        ]
+    },
+    "inference_option": "true_gmm",
+    "reconstruction_params": {
+        "alpha_kl_z": 0.001,
+        "beta_euclid": 0.0005,
+        "gamma_sparsity": 0.001,
+        "num_classes": 8
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "env_name": "cheetah-multi-task",
+    "n_train_tasks": 0,
+    "n_eval_tasks": 40,
+    "latent_size": 8,
+    "env_params": {
+        "n_train_tasks": 0,
+        "n_eval_tasks": 40,
+        "use_normalized_env": true,
+        "task_variants":  ["velocity_forward", "velocity_backward",
+			   "goal_forward", "goal_backward",
+			   "flip_forward", "jump",
+			   "stand_front", "stand_back"]
+    },
+    "algo_params": {
+        "num_tasks_sample": 80,
+	"num_evals": 1
+    }
+}

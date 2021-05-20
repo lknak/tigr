@@ -1,0 +1,24 @@
+{
+    "env_name": "ant-multi-task",
+    "n_train_tasks": 90,
+    "n_eval_tasks": 45,
+    "latent_size": 9,
+    "env_params": {
+        "n_train_tasks": 90,
+        "n_eval_tasks": 45,
+        "use_normalized_env": true,
+        "task_variants":  ["velocity_left",
+			   "velocity_right",
+			   "velocity_up",
+			   "velocity_down",
+			   "goal_left",
+			   "goal_right",
+			   "goal_up",
+			   "goal_down",
+			   "jump"]
+    },
+    "algo_params": {
+        "num_tasks_sample": 90,
+	"num_evals": 1
+    }
+}
