@@ -13,36 +13,33 @@ This repository is based on [rlkit](https://github.com/vitchyr/rlkit), [PEARL](h
 ### Instructions
 
 Deprecated, but currently still necessary instructions:
-- Clone this repo with `git clone --recurse-submodules`. If not working install the `rand_params_envs` submodule (https://github.com/dennisl88/rand_param_envs) and `meta_rand_envs` submodule (https://github.com/xWayl/meta_rand_envs).
+- Clone this repo with `git clone --recurse-submodules`. If not working install the `rand_params_envs` submodule [rand_param_envs](https://github.com/dennisl88/rand_param_envs) and `meta_rand_envs` submodule [meta_rand_envs](https://github.com/lknak/meta_rand_envs).
 
 #### Installation.
 - To install locally, you will need to first install [MuJoCo](https://www.roboti.us/index.html).
 For the task distributions in which the reward function varies (Cheetah, Ant, Humanoid), install MuJoCo200.
 (following is deprecated and will be removed) For the task distributions where different tasks correspond to different model parameters (Walker and Hopper), MuJoCo131 is required.
 Simply install it the same way as MuJoCo200.
-These environments make use of the module `rand_param_envs` which is submoduled in this repository.
-Add the module to your python path, `export PYTHONPATH=./rand_param_envs:$PYTHONPATH`
-(Check out [direnv](https://direnv.net/) for handy directory-dependent path managenement.)
 - Set `LD_LIBRARY_PATH` to point to both the MuJoCo binaries (`/$HOME/.mujoco/mujoco200/bin`) as well as the gpu drivers (something like `/usr/lib/nvidia-390`, you can find your version by running `nvidia-smi`).
 - For the remaining dependencies, we recommend using [miniconda](https://docs.conda.io/en/latest/miniconda.html). Use
-Use the latest `yml` file (env_tigr.yml) to set a conda virtual machine.
+Use the latest `yml` file (tigr.yml) to set a conda virtual machine.
 Make sure the correct GPU driver is installed and you use a matching version of CUDA toolkit and torch.
-We used torch 1.7.0 with cuda11 for our evaluations (`pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.html`)
+We use torch 1.7.0 with cuda version 11 for our evaluations (`pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.html`)
 
 This installation has been tested only on 64-bit Ubuntu 18.04.
 
 ##### Environments:
-- We created versions of the standard Mujoco environments.
-To perform experiments clone the [meta_rand_envs](https://github.com/xWayl/meta_rand_envs) repository and and install in dev mode on the created conda env.
+- We created versions of the standard Mujoco environments in the repository [meta_rand_envs](https://github.com/lknak/meta_rand_envs).
+To perform experiments, both submodules [rand_param_envs](https://github.com/dennisl88/rand_param_envs) and [meta_rand_envs](https://github.com/lknak/meta_rand_envs) must be installed in dev mode on the created conda env.
+For installation, perform the following steps for meta_rand_envs (rand_param_envs analogously):
 ```
-cd [project folder meta_rand_envs]
-conda activate tibiamrl
+cd [submodules/meta_rand_envs]
+conda activate tigr
 pip install -e .
 ```
 
-- MetaWorld Experiments (currently under review): Clone the package [metaworld](https://github.com/rlworkgroup/metaworld) and install in dev mode on the created conda env.
+- MetaWorld Experiments (currently under review): Clone the package [metaworld](https://github.com/rlworkgroup/metaworld) and install in dev mode on the created conda env (see above).
 As their repo does not provide official releases and compatibility over versions and commits is not guaranteed, the wrapper build for this repository is tested and used with the metaworld commit from 7/23/2020 @ 12:11 AM.
-Make sure to use this commit to avoid errors.
 
 
 ### Things to notice
@@ -61,6 +58,7 @@ Further environments are currently under review and might not work.
 
 - Output files will be written to `./output/[ENV]/[EXP NAME]` where the experiment name is uniquely generated based on the date.
 The file `progress.csv` contains statistics logged over the course of training.
+We also provide online evaluation via tensorboard located in the `/tensorboard` folder. Use `tensorboard --logdir=./output/[ENV]/[EXP NAME]/tensorboard` for visualizations of learning curves and the current embeddings.
 
 ### Troubleshoot
 
