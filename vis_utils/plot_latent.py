@@ -11,10 +11,6 @@ from sklearn.manifold import TSNE
 
 DATA_DIR = os.path.join('output', 'comparisons', 'cheetah-multi-task', 'ours', '2021_05_10_17_35_02_cheetah_multi_task_ts~64_true_gmm', 'tensorboard')
 
-# DATA_DIR = os.path.join('output', 'clustering', '2021_05_18_16_41_35_cheetah_multi_task_ts~64_no_cl_true_gmm', 'tensorboard')
-# DATA_DIR = os.path.join('output', 'clustering', '2021_05_18_16_41_40_cheetah_multi_task_ts~64_no_spars_true_gmm', 'tensorboard')
-# DATA_DIR = os.path.join('output', 'clustering', '2021_05_18_16_41_45_cheetah_multi_task_ts~64_no_euclid_true_gmm', 'tensorboard')
-
 FIG_DIR = os.path.join('log', 'encodings')
 
 PLOT_LIST = []
@@ -86,11 +82,12 @@ def main(run_name=None, save=True, show_='last', use_tsne=True, DIM_RED=2):
                  'velocity_backward': 'Run forward', 'velocity_forward': 'Run backward'}
 
     # Plotting
+
+    plt.style.use('seaborn')
+
     # Use Latex text
     matplotlib.rcParams['mathtext.fontset'] = 'stix'
     matplotlib.rcParams['font.family'] = 'STIXGeneral'
-
-    plt.style.use('seaborn')
 
     size_ = 31
     plt.rc('font', size=size_)  # controls default text sizes
@@ -126,23 +123,20 @@ def main(run_name=None, save=True, show_='last', use_tsne=True, DIM_RED=2):
         colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
         colors += ['#db8233', '#8c564b', '#e377c2']
         for i, target_class in enumerate(unique_tasks):
-            for j, pred_class in enumerate(unique_tasks):
-                match_values = values[true_tasks == target_class][predicted_tasks[true_tasks == target_class] == pred_class]
-                acc = (predicted_tasks[true_tasks == target_class] == pred_class).mean() * 100
+            match_values = values[true_tasks == target_class]
 
-                if match_values.shape[1] == 3:
-                    el = ax.scatter(match_values[:, 0], match_values[:, 1], match_values[:, 2],
-                                    label=class_map[str(target_class)],
-                                    marker=MARKERS[j],
-                                    color=colors[i % len(colors)])
-                else:
-                    el = ax.scatter(match_values[:, 0], match_values[:, 1],
-                                    label=class_map[str(target_class)],
-                                    marker=MARKERS[j],
-                                    color=colors[i % len(colors)])
+            if match_values.shape[1] == 3:
+                el = ax.scatter(match_values[:, 0], match_values[:, 1], match_values[:, 2],
+                                label=class_map[str(target_class)],
+                                marker=MARKERS[0],
+                                color=colors[i % len(colors)])
+            else:
+                el = ax.scatter(match_values[:, 0], match_values[:, 1],
+                                label=class_map[str(target_class)],
+                                marker=MARKERS[0],
+                                color=colors[i % len(colors)])
 
-                if target_class == pred_class:
-                    legend_elements.append(el)
+            legend_elements.append(el)
 
 
         if values.shape[1] == 3:

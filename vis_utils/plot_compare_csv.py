@@ -170,16 +170,19 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
 
     # Start plotting
     print(f'Plotting ...')
+
+    plt.style.use('seaborn')
+
     # Use Latex text
     matplotlib.rcParams['mathtext.fontset'] = 'stix'
     matplotlib.rcParams['font.family'] = 'STIXGeneral'
-
-    plt.style.use('seaborn')
 
     if plot_type == 0:
         size_ = 64 #8 task and encoder ablation
     elif plot_type == 1:
         size_ = 26 # veldir
+    elif plot_type == 2:
+        size_ = 34 # veldir
     else:
         size_ = 60
 
@@ -224,6 +227,7 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
                 min_mean = mean.min() if min_mean > mean.min() else min_mean
 
             if top_limit is not None and top_limit[i % len(top_limit)] != -1: axs[i].set_ylim(top=top_limit[i % len(top_limit)])
+            if title_.split("||")[i] == 'Clustering Losses': axs[i].set_ylim(bottom=-220)
             axs[i].set_title(title_.split("||")[i])
 
             axs[i].set_xlabel('Training Transition $\it{n}$')
@@ -258,6 +262,14 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
             for line in leg.get_lines():
                 line.set_linewidth(3.0)
             fig.set_size_inches(24., 4.5)
+        elif plot_type == 2:
+            # ant 3 and single
+            plt.plot([], [], label='final performance', c='black', linestyle='--', linewidth=size_ * 0.15)
+            leg = fig.legend(handles=axs[-1].get_legend_handles_labels()[0], labels=axs[-1].get_legend_handles_labels()[1],
+                       bbox_to_anchor=(0.5, -0.08), loc='upper center', ncol=len(pl_list[-1][title].keys()) + 1 if len(pl_list) > 1 else 3, handlelength=1.5)
+            for line in leg.get_lines():
+                line.set_linewidth(3.0)
+            fig.set_size_inches(32., 4.5)
         else:
             leg = fig.legend(handles=axs[-1].get_legend_handles_labels()[0], labels=axs[-1].get_legend_handles_labels()[1],
                        bbox_to_anchor=(0.5, -0.08), loc='upper center', ncol=len(pl_list[-1][title].keys()) if len(pl_list) > 1 else 3, handlelength=1)

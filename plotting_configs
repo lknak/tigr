@@ -10,9 +10,38 @@ python vis_utils/plot_compare_csv.py "output/cheetah-multi-task/eval/*vel*;outpu
 
 # Clustering losses
 
-python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/clustering/*cheetah_multi_task_ts~64_no_cl_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_euclid_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_spars_true_gmm" "TIGR;No classification;No euclid;No sparsity" "Clustering Losses" -50 "" 0
+python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/clustering/*cheetah_multi_task_ts~64_no_cl_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_euclid_true_gmm" "TIGR;No classification;No euclid" "Clustering Losses" -50 "" 0
 
 
 # Encoder ts
 
-python vis_utils/plot_compare_csv.py "output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~32_true_gmm" "GRU [64];MLP [64];TRANSFORMER [64];GRU [32];MLP [32];TRANSFORMER [32]" "Encoder Ablation" -50 "" 0
+python vis_utils/plot_compare_csv.py "output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~64_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~gru_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~mlp_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~32_true_gmm" "GRU [64];MLP [64];Transformer [64];GRU [32];MLP [32];Transformer [32]" "Encoder Ablation" -50 "" 0
+
+
+# All env 
+
+python vis_utils/plot_compare_csv.py "output/cheetah-multi-task/eval/*vel*;output/cheetah-multi-task/eval/pearl/cheetah-stationary-vel/*||output/cheetah-multi-task/eval/*dir*;output/cheetah-multi-task/eval/pearl/cheetah-stationary-dir/*||output/comparisons/ant-multi-task/ours/*;output/comparisons/ant-multi-task/PEARL/*;output/comparisons/ant-multi-task/promp/*;output/comparisons/ant-multi-task/rl2/*;output/comparisons/ant-multi-task/trpo/*||output/comparisons/cheetah-multi-task/ours/*;output/comparisons/cheetah-multi-task/PEARL/*;output/comparisons/cheetah-multi-task/promp/*;output/comparisons/cheetah-multi-task/rl2/*;output/comparisons/cheetah-multi-task/trpo/*" "TIGR;PEARL;PRO-MP;RL2;MAML" "Half-Cheetah Vel-Task||Half-Cheetah Dir-Task||Ant 3-Task||Half-Cheetah 8-Task" "0||-1||-50||-50" "" 2
+
+
+# Task inference
+
+python vis_utils/plot_ti_evaluation_one_fig.py output/cheetah-multi-task/2021_05_18_11_48_58_cheetah_showcase_ti_true_gmm_cheetah_showcase_ti 0;2;6;5 1
+
+python vis_utils/plot_ti_evaluation_one_fig.py output/cheetah-multi-task/2021_05_18_11_48_58_cheetah_showcase_ti_true_gmm_cheetah_showcase_ti 0;1;2;3;6;7;5;4
+
+# Latent encoding: Adjust path to data in file!
+python vis_utils/plot_latent.py
+
+
+-------------------------------------------------------
+
+# Thesis extras
+
+python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/thesis/*cheetah_multi_task_td~None_uP~False_ae~1_true_gmm;output/thesis/*cheetah_multi_task_td~worst_uP~False_ae~0_true_gmm;output/thesis/*cheetah_multi_task_td~best_uP~False_ae~0_true_gmm" "TIGR;Experience augmentation;Curriculum (worst);Curriculum (best)" "Clustering Losses" -50 "" 0
+
+python vis_utils/plot_compare_csv.py "output/comparisons/cheetah-multi-task/ours/*;output/clustering/*cheetah_multi_task_ts~64_no_cl_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_euclid_true_gmm;output/clustering/*cheetah_multi_task_ts~64_no_spars_true_gmm" "TIGR;No classification;No euclid;No sparsity" "Clustering Losses" -50 "" 0
+
+python vis_utils/plot_compare_csv.py "output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~32_true_gmm;output/ablation/encoder_ts/*cheetah_multi_task_et~transformer_ts~32_tc~network_true_gmm" "Multiplication;Network" "Timestep Combination" -50 "" 0
+
+
+

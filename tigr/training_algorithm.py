@@ -464,7 +464,7 @@ class TrainingAlgorithm:
 
     def showcase_all(self):
 
-        print('Rendering environment interaction in non-stationary env ...')
+        print('Rendering environment interaction in test envs ...')
         # Assuming train tasks are equally filled with different base tasks
         rng = np.random.default_rng()
         images = self.rollout_coordinator.evaluate('test', self.test_tasks, 1, deterministic=True, animated=False,
