@@ -24,7 +24,7 @@ class DecoderMDP(nn.Module):
 
         self.state_reconstruction_clip = state_reconstruction_clip if state_reconstruction_clip is not None and 0 < state_reconstruction_clip < state_dim else state_dim
 
-        self.reward_decoder_input_size = self.state_reconstruction_clip + z_dim
+        self.reward_decoder_input_size = state_dim + action_dim + z_dim
         self.reward_decoder_hidden_size = int(self.reward_decoder_input_size * net_complex)
 
         self.net_state_decoder = Mlp(
@@ -40,11 +40,6 @@ class DecoderMDP(nn.Module):
 
     def forward(self, state, action, next_state, z):
         state_estimate = self.net_state_decoder(torch.cat([state, action, z], dim=-1))
-
-        # Use estimated state in case we don't have next state as input (generating roll-outs)
-        if next_state is None:
-            reward_estimate = self.net_reward_decoder(torch.cat([state_estimate, z], dim=-1))
-        else:
-            reward_estimate = self.net_reward_decoder(torch.cat([next_state, z], dim=-1))
+        reward_estimate = self.net_reward_decoder(torch.cat([state, action, z], dim=-1))
 
         return state_estimate, reward_estimate

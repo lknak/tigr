@@ -499,7 +499,7 @@ class TrainingAlgorithm:
 
             # Release everything if job is finished
             out.release()
-        print('\tShowcasing finished, writing results json')
+        print(f'\tShowcasing finished, average return: {np.mean(np.sum([[transition["reward"] for transition in path] for path in images], axis=1))}. Writing results json.')
 
         with open(os.path.join(logger.get_snapshot_dir(), 'showcase_all_results.json'), 'w') as f:
             class NumpyEncoder(json.JSONEncoder):
