@@ -281,10 +281,12 @@ class AugmentedTrainer(BaseTrainer):
 
             # Calculate extra losses
             # Calculate class regularization loss
-            loss_ce = nn.CrossEntropyLoss(reduction='none')
-            reg_loss = loss_ce(logits, targets)
+            reg_loss = ptu.zeros(1)
 
             if self.use_regularization_loss:
+                loss_ce = nn.CrossEntropyLoss(reduction='none')
+                reg_loss = loss_ce(logits, targets)
+
                 # Total mixture loss after reg
                 mixture_nll = mixture_nll + self.regularization_lambda * reg_loss
 
@@ -296,7 +298,7 @@ class AugmentedTrainer(BaseTrainer):
                                                                                ptu.ones([latent_distributions._batch_shape[0],
                                                                                          self.num_classes,
                                                                                          self.latent_dim])], dim=-1),
-                                                                    self.latent_dim)),
+                                                                    self.latent_dim, sigma_ops=None)),
                                  dim=-1)
 
             # Overall elbo, but weight KL div takes up self.alpha_kl_z fraction of the loss!
