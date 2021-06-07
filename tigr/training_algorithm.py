@@ -515,8 +515,8 @@ class TrainingAlgorithm:
         for i in range(self.rollout_coordinator.num_workers):
             self.rollout_coordinator.workers[i].env.wrapped_env.change_mode = 'time'
             self.rollout_coordinator.workers[i].env.wrapped_env.meta_mode = 'test'
-            self.rollout_coordinator.workers[i].env.wrapped_env.change_steps = 60
-            self.rollout_coordinator.max_path_length = 299
+            self.rollout_coordinator.workers[i].env.wrapped_env.change_steps = 80
+            self.rollout_coordinator.max_path_length = 560
 
         print('Rendering environment interaction in non-stationary env ...')
         # Assuming train tasks are equally filled with different base tasks
@@ -555,7 +555,7 @@ class TrainingAlgorithm:
 
             # Release everything if job is finished
             out.release()
-        print('\tShowcasing finished, writing results json')
+        print(f'\tShowcasing finished, avg return: {np.mean(np.sum([[transition["reward"] for transition in path] for path in images], axis=1))}. Writing results json')
 
         with open(os.path.join(logger.get_snapshot_dir(), 'non_stationary_results.json'), 'w') as f:
             class NumpyEncoder(json.JSONEncoder):

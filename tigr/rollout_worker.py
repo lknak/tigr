@@ -241,6 +241,7 @@ class RolloutCoordinator:
                             'base_task' : path['true_tasks'].squeeze(axis=1)[s_ind]['base_task'],
                             'specification' : path['true_tasks'].squeeze(axis=1)[s_ind]['specification'],
                             'image' : info['frame'],
+                            'observation' : path['observations'][s_ind],
                             'action' : path['actions'][s_ind],
                             'reward' : path['rewards'][s_ind],
                             'z' : path['task_indicators'][s_ind]

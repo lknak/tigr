@@ -186,7 +186,10 @@ def experiment(variant):
         itr = variant['showcase_itr']
         path = variant['path_to_weights']
         for name, net in networks.items():
-            net.load_state_dict(torch.load(os.path.join(path, name + '_itr_' + str(itr) + '.pth'), map_location='cpu'))
+            try:
+                net.load_state_dict(torch.load(os.path.join(path, name + '_itr_' + str(itr) + '.pth'), map_location='cpu'))
+            except Exception as e:
+                print(f'Loading weights for net {name} failed. Skipping.')
         print(f'Loaded weights "{variant["path_to_weights"]}"')
         if os.path.exists(os.path.join(variant['path_to_weights'], 'stats_dict.json')):
             with open(os.path.join(variant['path_to_weights'], 'stats_dict.json'), 'r') as f:

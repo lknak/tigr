@@ -62,6 +62,8 @@ def main(path_to_folder, use_plots=None, plot_type=0, name=None, save_=True):
     plt.style.use('seaborn')
 
     # Use Latex text
+    matplotlib.rcParams['pdf.fonttype'] = 42
+    matplotlib.rcParams['ps.fonttype'] = 42
     matplotlib.rcParams['mathtext.fontset'] = 'stix'
     matplotlib.rcParams['font.family'] = 'STIXGeneral'
     #matplotlib.rcParams['font.size'] = 24

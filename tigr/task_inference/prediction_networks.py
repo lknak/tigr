@@ -34,7 +34,7 @@ class DecoderMDP(nn.Module):
         )
         self.net_reward_decoder = Mlp(
             input_size=self.reward_decoder_input_size,
-            hidden_sizes=[self.reward_decoder_hidden_size, self.reward_decoder_hidden_size],
+            hidden_sizes=[self.reward_decoder_hidden_size, self.reward_decoder_hidden_size, self.reward_decoder_hidden_size // 2],
             output_size=reward_dim
         )
 

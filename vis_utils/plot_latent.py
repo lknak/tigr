@@ -86,6 +86,8 @@ def main(run_name=None, save=True, show_='last', use_tsne=True, DIM_RED=2):
     plt.style.use('seaborn')
 
     # Use Latex text
+    matplotlib.rcParams['pdf.fonttype'] = 42
+    matplotlib.rcParams['ps.fonttype'] = 42
     matplotlib.rcParams['mathtext.fontset'] = 'stix'
     matplotlib.rcParams['font.family'] = 'STIXGeneral'
 
@@ -117,7 +119,7 @@ def main(run_name=None, save=True, show_='last', use_tsne=True, DIM_RED=2):
         else:
             ax = plt.gca()
             # ax.set_aspect('auto')
-            ax.set_title(f'Half-Cheetah 8-Task')
+            ax.set_title(f'Half-Cheetah-Eight')
 
         legend_elements = []
         colors = plt.rcParams['axes.prop_cycle'].by_key()['color']

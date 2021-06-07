@@ -27,6 +27,7 @@
     },
     "inference_option": "true_gmm",
     "reconstruction_params": {
+	"use_regularization_loss": true,
         "alpha_kl_z": 0.001,
         "beta_euclid": 0.0005,
         "gamma_sparsity": 0.001,

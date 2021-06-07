@@ -174,6 +174,8 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
     plt.style.use('seaborn')
 
     # Use Latex text
+    matplotlib.rcParams['pdf.fonttype'] = 42
+    matplotlib.rcParams['ps.fonttype'] = 42
     matplotlib.rcParams['mathtext.fontset'] = 'stix'
     matplotlib.rcParams['font.family'] = 'STIXGeneral'
 
@@ -227,7 +229,7 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
                 min_mean = mean.min() if min_mean > mean.min() else min_mean
 
             if top_limit is not None and top_limit[i % len(top_limit)] != -1: axs[i].set_ylim(top=top_limit[i % len(top_limit)])
-            if title_.split("||")[i] == 'Clustering Losses': axs[i].set_ylim(bottom=-220)
+            if title_.split("||")[i] in ['Clustering Losses', 'Extensions', 'Experience Augmentation']: axs[i].set_ylim(bottom=-220)
             axs[i].set_title(title_.split("||")[i])
 
             axs[i].set_xlabel('Training Transition $\it{n}$')
@@ -252,7 +254,7 @@ def main(paths, names=None, title_='Cheetah 8-Task', top_limit=None, x_limits=No
             leg = fig.legend(handles=axs[-1].get_legend_handles_labels()[0], labels=axs[-1].get_legend_handles_labels()[1],
                              bbox_to_anchor=(0.9, 0.5), loc='center left', ncol=1, handlelength=1)
             for line in leg.get_lines():
-                line.set_linewidth(3.0)
+                line.set_linewidth(4.0)
             fig.set_size_inches(24., 15.)
         elif plot_type == 1:
             # ant 3 and single
